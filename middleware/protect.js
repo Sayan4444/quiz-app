@@ -11,7 +11,7 @@ export default async function protect(req, res, next) {
         //Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded.id);
-        req.user = user;
+        req.session.user = user;
         next();
 
     } catch (error) {
